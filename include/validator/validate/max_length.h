@@ -26,7 +26,14 @@ public:
     template <typename T>
     Result Validate(const T& t) {
         auto ok = validate(t);
-        return ResultBuilder().WithIsValidation(ok).Build();
+
+        if (ok) {
+            return ValidResult;
+        }
+
+        std::string error_message_pattern = "";
+
+        return ResultBuilder().WithIsValidation(false).WithErrorMessage(error_message_pattern).Build();
     }
 
 private:
