@@ -48,7 +48,8 @@ TEST_F(ValidatorTest, validator_test) {
         a.t = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
         auto res = a.Validate();
         EXPECT_FALSE(res.isValidation);
-        EXPECT_EQ(res.errorMessage, std::string("The size of `t` is not valid. The range of sizes is [0, 10], but actual is 11."));
+        EXPECT_EQ(res.errorMessage,
+                std::string("The size of `t` is not valid. The range of sizes is [0, 10], but actual is 11."));
     }
 }
 
