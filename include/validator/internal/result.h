@@ -33,6 +33,10 @@ private:
 
 inline std::string GenerateErrorMessage(
         const std::string& error_message_pattern, const std::map<std::string, std::string> replace_map = {}) {
+    if (error_message_pattern.empty()) {
+        return error_message_pattern;
+    }
+
     std::string res = "";
 
     size_t len = error_message_pattern.length();
