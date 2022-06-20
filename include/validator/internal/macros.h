@@ -9,7 +9,7 @@ namespace validator {
 #define VALIDATOR_BEGIN \
                         \
 public:                 \
-    Result Validate() {
+    Result Validate() const {
 #define VALIDATOR_END                                                   \
     return ::validator::ResultBuilder().WithIsValidation(true).Build(); \
     }

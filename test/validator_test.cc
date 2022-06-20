@@ -1,6 +1,7 @@
 #include "gtest/gtest.h"
 #include "snapshot/snapshot.h"
 
+#include "validator/validate/validate_nested.h"
 #include "validator/validator.h"
 
 namespace validator {
@@ -19,6 +20,14 @@ struct A {
     VALIDATOR_DECLARE(a);
     VALIDATOR_DECLARE(s, MinLength(1), MaxLength(10), Length(1, 10));
     VALIDATOR_DECLARE(t, Size(0, 10, Size::WithErrorMessagePattern("size error")));
+    VALIDATOR_END
+};
+
+struct B {
+    A a;
+
+    VALIDATOR_BEGIN
+    VALIDATOR_DECLARE(a, ValidateNested());
     VALIDATOR_END
 };
 
@@ -49,6 +58,16 @@ TEST_F(ValidatorTest, validator_test) {
         auto res = a.Validate();
         EXPECT_FALSE(res.isValidation);
         EXPECT_EQ(res.errorMessage, std::string("size error"));
+    }
+}
+
+TEST_F(ValidatorTest, validator_nested_test) {
+    B b;
+
+    {
+        auto res = b.Validate();
+        EXPECT_FALSE(res.isValidation);
+        EXPECT_EQ(res.errorMessage, std::string("`s` is to short. Min length is 1, but actual is 0."));
     }
 }
 
