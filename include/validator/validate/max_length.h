@@ -5,11 +5,14 @@
 
 #include "../internal/options.h"
 #include "../internal/result.h"
+#include "../internal/validator.h"
 #include "../types_check/has_size.h"
 
 namespace validator {
 
 class MaxLength : OptionsBaseBuilder {
+    friend class ::validator::Validator;
+
 public:
     struct Options : public OptionsBase {};
 
