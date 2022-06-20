@@ -1,5 +1,5 @@
-#ifndef VALIDATOR_MACROS_H
-#define VALIDATOR_MACROS_H
+#ifndef VALIDATOR_INTERNAL_MACROS_H
+#define VALIDATOR_INTERNAL_MACROS_H
 
 #include "./result.h"
 
@@ -41,4 +41,4 @@ public:                 \
 
 }  // namespace validator
 
-#endif  // VALIDATOR_MACROS_H
+#endif  // VALIDATOR_INTERNAL_MACROS_H

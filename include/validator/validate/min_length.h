@@ -1,22 +1,22 @@
-#ifndef VALIDATOR_MAX_LENGTH_H
-#define VALIDATOR_MAX_LENGTH_H
+#ifndef VALIDATOR_VALIDATE_MIN_LENGTH_H
+#define VALIDATOR_VALIDATE_MIN_LENGTH_H
 
 #include <cstddef>
 
-#include "validator/options.h"
-#include "validator/result.h"
-#include "validator/types_check/has_size.h"
+#include "../internal/options.h"
+#include "../internal/result.h"
+#include "../types_check/has_size.h"
 
 namespace validator {
 
-class MaxLength : OptionsBaseBuilder {
+class MinLength : OptionsBaseBuilder {
 public:
     struct Options : public OptionsBase {};
 
 public:
-    MaxLength() = delete;
+    MinLength() = delete;
     template <typename... Opt>
-    MaxLength(size_t len, Opt&&... opts) : len_(len) {
+    MinLength(size_t len, Opt&&... opts) : len_(len) {
         (std::forward<Opt>(opts)(options_), ...);
     }
 
@@ -30,7 +30,7 @@ private:
     template <typename T>
     bool validate(const T& t) {
         if constexpr (has_size_v<T>) {
-            return t.size() <= len_;
+            return t.size() >= len_;
         } else {
             return true;
         }
@@ -43,4 +43,4 @@ private:
 
 }  // namespace validator
 
-#endif  // VALIDATOR_MAX_LENGTH_H
+#endif  // VALIDATOR_VALIDATE_MIN_LENGTH_H

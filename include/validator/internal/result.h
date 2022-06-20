@@ -1,5 +1,5 @@
-#ifndef VALIDATOR_RESULT_H
-#define VALIDATOR_RESULT_H
+#ifndef VALIDATOR_INTERNAL_RESULT_H
+#define VALIDATOR_INTERNAL_RESULT_H
 
 #include <string>
 
@@ -32,4 +32,4 @@ private:
 
 }  // namespace validator
 
-#endif  // VALIDATOR_RESULT_H
+#endif  // VALIDATOR_INTERNAL_RESULT_H

@@ -1,5 +1,5 @@
-#ifndef VALIDATOR_OPTIONS_H
-#define VALIDATOR_OPTIONS_H
+#ifndef VALIDATOR_INTERNAL_OPTIONS_H
+#define VALIDATOR_INTERNAL_OPTIONS_H
 
 #include <optional>
 #include <string>
@@ -28,4 +28,4 @@ public:
 
 }  // namespace validator
 
-#endif  // VALIDATOR_OPTIONS_H
+#endif  // VALIDATOR_INTERNAL_OPTIONS_H
