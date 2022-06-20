@@ -10,7 +10,7 @@
 
 namespace validator {
 
-class Length : OptionsBaseBuilder {
+class Length : public OptionsBaseBuilder {
     friend class ::validator::Validator;
 
 public:

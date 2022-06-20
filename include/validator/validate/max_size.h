@@ -11,7 +11,7 @@
 
 namespace validator {
 
-class MaxSize : OptionsBaseBuilder {
+class MaxSize : public OptionsBaseBuilder {
     friend class ::validator::Validator;
 
 public:

@@ -10,7 +10,7 @@
 
 namespace validator {
 
-class Size : OptionsBaseBuilder {
+class Size : public OptionsBaseBuilder {
     friend class ::validator::Validator;
 
 public:

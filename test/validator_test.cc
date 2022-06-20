@@ -18,7 +18,7 @@ struct A {
     VALIDATOR_BEGIN
     VALIDATOR_DECLARE(a);
     VALIDATOR_DECLARE(s, MinLength(1), MaxLength(10), Length(1, 10));
-    VALIDATOR_DECLARE(t, Size(0, 10))
+    VALIDATOR_DECLARE(t, Size(0, 10, Size::WithErrorMessagePattern("size error")));
     VALIDATOR_END
 };
 
@@ -48,8 +48,7 @@ TEST_F(ValidatorTest, validator_test) {
         a.t = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
         auto res = a.Validate();
         EXPECT_FALSE(res.isValidation);
-        EXPECT_EQ(res.errorMessage,
-                std::string("The size of `t` is not valid. The range of sizes is [0, 10], but actual is 11."));
+        EXPECT_EQ(res.errorMessage, std::string("size error"));
     }
 }
 
