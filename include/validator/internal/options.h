@@ -8,7 +8,7 @@ namespace validator {
 
 struct OptionsBase {
     std::optional<std::string> field_name{std::nullopt};
-    std::optional<std::string> error_message{std::nullopt};
+    std::optional<std::string> error_message_pattern{std::nullopt};
 };
 
 class OptionsBaseBuilder {
@@ -19,9 +19,9 @@ public:
         };
     }
 
-    static auto WithErrorMessage(const std::string& error_message) {
-        return [error_message](auto& t) {
-            t.error_message = error_message;
+    static auto WithErrorMessagePattern(const std::string& error_message_pattern) {
+        return [error_message_pattern](auto& t) {
+            t.error_message_pattern = error_message_pattern;
         };
     }
 };
