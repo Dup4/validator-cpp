@@ -31,8 +31,8 @@ private:
     Result result;
 };
 
-inline std::string GenerateErrorMessage(
-        const std::string& error_message_pattern, const std::map<std::string, std::string> replace_map = {}) {
+inline std::string GenerateErrorMessage(const std::string& error_message_pattern,
+                                        const std::map<std::string, std::string> replace_map = {}) {
     if (error_message_pattern.empty()) {
         return error_message_pattern;
     }
