@@ -17,7 +17,7 @@ public:                         \
 #define VALIDATOR_DECLARE_FIELD(field, ...)                                                    \
     {                                                                                          \
         auto res = ::validator::Validator::ExecuteMultiValidate(field, #field, ##__VA_ARGS__); \
-        if (!res.isValidation) {                                                               \
+        if (!res.IsValidation) {                                                               \
             return res;                                                                        \
         }                                                                                      \
     }

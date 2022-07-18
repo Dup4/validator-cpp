@@ -21,13 +21,12 @@ TEST_F(IsEmptyTest, is_empty_test) {
     };
 
     A a;
-
     a.s = "d";
 
     {
         auto res = a.Validate();
-        EXPECT_FALSE(res.isValidation);
-        EXPECT_EQ(res.errorMessage, std::string("`s` is not empty."));
+        EXPECT_FALSE(res.IsValidation);
+        EXPECT_EQ(res.ErrorMessage, std::string("`s` is not empty."));
     }
 }
 

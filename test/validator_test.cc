@@ -36,28 +36,28 @@ TEST_F(ValidatorTest, validator_test) {
 
     {
         auto res = a.Validate();
-        EXPECT_FALSE(res.isValidation);
-        EXPECT_EQ(res.errorMessage, std::string("`s` is to short. Min length is 1, but actual is 0."));
+        EXPECT_FALSE(res.IsValidation);
+        EXPECT_EQ(res.ErrorMessage, std::string("`s` is to short. Min length is 1, but actual is 0."));
     }
 
     {
         a.s = "12345678901";
         auto res = a.Validate();
-        EXPECT_FALSE(res.isValidation);
-        EXPECT_EQ(res.errorMessage, std::string("`s` is to long. Max length is 10, but actual is 11."));
+        EXPECT_FALSE(res.IsValidation);
+        EXPECT_EQ(res.ErrorMessage, std::string("`s` is to long. Max length is 10, but actual is 11."));
     }
 
     {
         a.s = "123";
         auto res = a.Validate();
-        EXPECT_TRUE(res.isValidation);
+        EXPECT_TRUE(res.IsValidation);
     }
 
     {
         a.t = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
         auto res = a.Validate();
-        EXPECT_FALSE(res.isValidation);
-        EXPECT_EQ(res.errorMessage, std::string("size error"));
+        EXPECT_FALSE(res.IsValidation);
+        EXPECT_EQ(res.ErrorMessage, std::string("size error"));
     }
 }
 
@@ -66,8 +66,8 @@ TEST_F(ValidatorTest, validator_nested_test) {
 
     {
         auto res = b.Validate();
-        EXPECT_FALSE(res.isValidation);
-        EXPECT_EQ(res.errorMessage, std::string("`s` is to short. Min length is 1, but actual is 0."));
+        EXPECT_FALSE(res.IsValidation);
+        EXPECT_EQ(res.ErrorMessage, std::string("`s` is to short. Min length is 1, but actual is 0."));
     }
 }
 

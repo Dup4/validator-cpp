@@ -7,19 +7,19 @@
 namespace validator {
 
 struct Result {
-    bool isValidation{false};
-    std::string errorMessage{""};
+    bool IsValidation{false};
+    std::string ErrorMessage{""};
 };
 
 class ResultBuilder {
 public:
-    ResultBuilder& WithIsValidation(bool isValidation) {
-        result.isValidation = isValidation;
+    ResultBuilder& WithIsValidation(bool IsValidation = true) {
+        result.IsValidation = IsValidation;
         return *this;
     }
 
-    ResultBuilder& WithErrorMessage(const std::string& errorMessage) {
-        result.errorMessage = errorMessage;
+    ResultBuilder& WithErrorMessage(const std::string& ErrorMessage) {
+        result.ErrorMessage = ErrorMessage;
         return *this;
     }
 

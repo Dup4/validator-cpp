@@ -9,7 +9,7 @@ class Validator {
 public:
     template <typename T, typename V>
     static void ExecuteValidate(const T& t, [[maybe_unused]] const std::string& field_name, V&& v, Result& res) {
-        if (!res.isValidation) {
+        if (!res.IsValidation) {
             return;
         }
 
