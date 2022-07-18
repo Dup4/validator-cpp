@@ -15,9 +15,9 @@ TEST_F(IsEmptyTest, is_empty_test) {
     struct A {
         std::string s;
 
-        VALIDATOR_BEGIN
-        VALIDATOR_DECLARE(s, IsEmpty());
-        VALIDATOR_END
+        VALIDATOR_DECLARE_BEGIN
+        VALIDATOR_DECLARE_FIELD(s, IsEmpty());
+        VALIDATOR_DECLARE_END
     };
 
     A a;

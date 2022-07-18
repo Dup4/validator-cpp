@@ -6,15 +6,15 @@
 
 namespace validator {
 
-#define VALIDATOR_BEGIN \
-                        \
-public:                 \
+#define VALIDATOR_DECLARE_BEGIN \
+                                \
+public:                         \
     Result Validate() const {
-#define VALIDATOR_END                                                   \
+#define VALIDATOR_DECLARE_END                                           \
     return ::validator::ResultBuilder().WithIsValidation(true).Build(); \
     }
 
-#define VALIDATOR_DECLARE(field, ...)                                                          \
+#define VALIDATOR_DECLARE_FIELD(field, ...)                                                    \
     {                                                                                          \
         auto res = ::validator::Validator::ExecuteMultiValidate(field, #field, ##__VA_ARGS__); \
         if (!res.isValidation) {                                                               \

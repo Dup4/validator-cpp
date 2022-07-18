@@ -16,19 +16,19 @@ struct A {
     std::string s;
     std::vector<int> t;
 
-    VALIDATOR_BEGIN
-    VALIDATOR_DECLARE(a);
-    VALIDATOR_DECLARE(s, MinLength(1), MaxLength(10), Length(1, 10));
-    VALIDATOR_DECLARE(t, Size(0, 10, Size::WithErrorMessagePattern("size error")));
-    VALIDATOR_END
+    VALIDATOR_DECLARE_BEGIN
+    VALIDATOR_DECLARE_FIELD(a);
+    VALIDATOR_DECLARE_FIELD(s, MinLength(1), MaxLength(10), Length(1, 10));
+    VALIDATOR_DECLARE_FIELD(t, Size(0, 10, Size::WithErrorMessagePattern("size error")));
+    VALIDATOR_DECLARE_END
 };
 
 struct B {
     A a;
 
-    VALIDATOR_BEGIN
-    VALIDATOR_DECLARE(a, ValidateNested());
-    VALIDATOR_END
+    VALIDATOR_DECLARE_BEGIN
+    VALIDATOR_DECLARE_FIELD(a, ValidateNested());
+    VALIDATOR_DECLARE_END
 };
 
 TEST_F(ValidatorTest, validator_test) {
