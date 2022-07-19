@@ -1,4 +1,4 @@
-option(validator_build_tests "Build all of validator's own tests." OFF)
+option(VALIDATOR_BUILD_TESTS "Build all of validator's own tests." OFF)
 
 cmake_minimum_required(VERSION 3.14)
 
@@ -38,7 +38,7 @@ target_include_directories(validator-cpp INTERFACE
     ${RESULT_CPP_INCLUDE_DIR}
 )
 
-if(validator_build_tests)
+if(VALIDATOR_BUILD_TESTS)
     enable_testing()
 
     add_subdirectory(test/)
