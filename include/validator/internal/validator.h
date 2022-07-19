@@ -1,6 +1,7 @@
 #ifndef VALIDATOR_INTERNAL_VALIDATOR_H
 #define VALIDATOR_INTERNAL_VALIDATOR_H
 
+#include "./inject_entrance.h"
 #include "./result.h"
 
 namespace validator {
@@ -28,8 +29,15 @@ public:
 
         RESULT_DIRECT_RETURN(res);
     }
+
+    template <typename T>
+    static Result Validate(const T& t) {
+        return InjectEntrance::Validate(t);
+    }
 };
 
 }  // namespace validator
+
+using Validator = ::validator::Validator;
 
 #endif  // VALIDATOR_INTERNAL_VALIDATOR_H

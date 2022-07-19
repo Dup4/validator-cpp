@@ -2,7 +2,6 @@
 #define VALIDATOR_TYPES_CHECK_HAS_VALIDATE_H
 
 #include <type_traits>
-#include <vector>
 
 namespace validator {
 
