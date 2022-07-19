@@ -2,7 +2,7 @@ option(VALIDATOR_BUILD_TESTS "Build all of validator's own tests." OFF)
 
 cmake_minimum_required(VERSION 3.14)
 
-project(validator VERSION 0.0.0)
+project(validator VERSION 0.0.1)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
