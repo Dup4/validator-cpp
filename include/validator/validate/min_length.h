@@ -27,9 +27,8 @@ public:
     template <typename T>
     Result Validate(const T& t) {
         auto [ok, actual_value] = validate(t);
-
         if (ok) {
-            return ValidResult;
+            return Result::OK();
         }
 
         std::string error_message_pattern =
@@ -43,7 +42,8 @@ public:
         std::string error_message = ResultUtility::GenerateErrorMessage(
                 options_.error_message_pattern.value_or(error_message_pattern), replace_map);
 
-        return ResultBuilder().WithIsValidation(false).WithErrorMessage(error_message).Build();
+        auto res = Result::Builder(Result::ErrorCode::ValidateError).WithErrorMessage(error_message).Build();
+        RESULT_DIRECT_RETURN(res);
     }
 
 private:

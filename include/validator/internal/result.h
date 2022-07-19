@@ -4,34 +4,35 @@
 #include <map>
 #include <string>
 
+#include "result/result.h"     // IWYU pragma: export
+#include "result/result_or.h"  // IWYU pragma: export
+
 namespace validator {
 
-struct Result {
-    bool IsValidation{false};
-    std::string ErrorMessage{""};
+enum class ErrorCode {
+    OK = 0,
+    NestedError,
+    ValidateError,
 };
 
-class ResultBuilder {
-public:
-    ResultBuilder& WithIsValidation(bool IsValidation = true) {
-        result.IsValidation = IsValidation;
-        return *this;
+inline auto ErrorCodeToStr(ErrorCode error_code) {
+    static const std::map<ErrorCode, std::string> ErrorCodeToStrMap = {
+            {ErrorCode::OK, "OK"},
+            {ErrorCode::NestedError, "NestedError"},
+            {ErrorCode::ValidateError, "ValidateError"},
+    };
+
+    if (ErrorCodeToStrMap.count(error_code) == 0) {
+        return ErrorCodeToStrMap.rbegin()->second;
     }
 
-    ResultBuilder& WithErrorMessage(const std::string& ErrorMessage) {
-        result.ErrorMessage = ErrorMessage;
-        return *this;
-    }
+    return ErrorCodeToStrMap.at(error_code);
+}
 
-    Result Build() {
-        return result;
-    }
+using Result = result::Result<ErrorCode>;
 
-private:
-    Result result;
-};
-
-inline const static auto ValidResult = ResultBuilder().WithIsValidation(true).Build();
+template <typename T>
+using ResultOr = result::ResultOr<Result, T>;
 
 }  // namespace validator
 

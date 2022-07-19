@@ -8,8 +8,8 @@ namespace validator {
 class Validator {
 public:
     template <typename T, typename V>
-    static void ExecuteValidate(const T& t, [[maybe_unused]] const std::string& field_name, V&& v, Result& res) {
-        if (!res.IsValidation) {
+    static void ExecuteValidate(const T& t, const std::string& field_name, V&& v, Result& res) {
+        if (!res.IsOK()) {
             return;
         }
 
@@ -22,11 +22,11 @@ public:
 
     template <typename T, typename... V>
     static Result ExecuteMultiValidate(const T& t, const std::string& field_name, V&&... v) {
-        auto res = ResultBuilder().WithIsValidation(true).Build();
+        auto res = Result::OK();
 
         (ExecuteValidate(t, field_name, std::forward<V>(v), res), ...);
 
-        return res;
+        RESULT_DIRECT_RETURN(res);
     }
 };
 

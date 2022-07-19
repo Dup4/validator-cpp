@@ -23,8 +23,8 @@ TEST_F(IsNotEmptyTest, is_not_empty_test) {
 
     {
         auto res = a.Validate();
-        EXPECT_FALSE(res.IsValidation);
-        EXPECT_EQ(res.ErrorMessage, std::string("`s` is empty."));
+        EXPECT_FALSE(res.IsOK());
+        EXPECT_EQ(res.Message(), std::string("`s` is empty."));
     }
 }
 

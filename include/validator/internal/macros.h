@@ -10,14 +10,14 @@ namespace validator {
                                 \
 public:                         \
     Result Validate() const {
-#define VALIDATOR_DECLARE_END                                           \
-    return ::validator::ResultBuilder().WithIsValidation(true).Build(); \
+#define VALIDATOR_DECLARE_END         \
+    return ::validator::Result::OK(); \
     }
 
 #define VALIDATOR_DECLARE_FIELD(field, ...)                                                    \
     {                                                                                          \
         auto res = ::validator::Validator::ExecuteMultiValidate(field, #field, ##__VA_ARGS__); \
-        if (!res.IsValidation) {                                                               \
+        if (!res.IsOK()) {                                                                     \
             return res;                                                                        \
         }                                                                                      \
     }
