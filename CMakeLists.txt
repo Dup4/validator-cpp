@@ -15,12 +15,28 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_LIBDIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_INSTALL_BINDIR})
 
+include(FetchContent)
+
+FetchContent_Declare(
+    result_cpp
+    GIT_REPOSITORY https://github.com/Dup4/result-cpp.git
+    GIT_TAG v0.0.9
+)
+
+FetchContent_MakeAvailable(result_cpp)
+FetchContent_GetProperties(result_cpp)
+set(RESULT_CPP_INCLUDE_DIR ${result_cpp_SOURCE_DIR}/include)
+
 include_directories(
     ${PROJECT_SOURCE_DIR}/include/
+    ${RESULT_CPP_INCLUDE_DIR}
 )
 
 add_library(validator-cpp INTERFACE)
-target_include_directories(validator-cpp INTERFACE ${PROJECT_SOURCE_DIR}/include/)
+target_include_directories(validator-cpp INTERFACE
+    ${PROJECT_SOURCE_DIR}/include/
+    ${RESULT_CPP_INCLUDE_DIR}
+)
 
 if(validator_build_tests)
     enable_testing()
