@@ -4,7 +4,19 @@
 #include "validator/validate/is_empty.h"
 #include "validator/validator.h"
 
-namespace validator::validate {
+namespace validator {
+
+namespace is_empty_test {
+
+struct A {
+    std::string s;
+
+    VALIDATOR_DECLARE_BEGIN(A)
+    VALIDATOR_DECLARE_FIELD(s, IsEmpty())
+    VALIDATOR_DECLARE_END
+};
+
+}  // namespace is_empty_test
 
 class IsEmptyTest : public testing::Test {
 protected:
@@ -12,13 +24,7 @@ protected:
 };
 
 TEST_F(IsEmptyTest, is_empty_test) {
-    struct A {
-        std::string s;
-
-        VALIDATOR_DECLARE_BEGIN(A)
-        VALIDATOR_DECLARE_FIELD(s, IsEmpty());
-        VALIDATOR_DECLARE_END
-    };
+    using namespace is_empty_test;
 
     A a;
     a.s = "d";
@@ -30,4 +36,4 @@ TEST_F(IsEmptyTest, is_empty_test) {
     }
 }
 
-}  // namespace validator::validate
+}  // namespace validator

@@ -4,31 +4,17 @@
 #include "validator/validate/validate_nested.h"
 #include "validator/validator.h"
 
+#include "./data/a.h"
+#include "./data/b.h"
+#include "./data/c.h"
+
 namespace validator {
+
+using namespace test;
 
 class ValidatorTest : public testing::Test {
 protected:
     virtual void SetUp() override {}
-};
-
-struct A {
-    int a;
-    std::string s;
-    std::vector<int> t;
-
-    VALIDATOR_DECLARE_BEGIN(A)
-    VALIDATOR_DECLARE_FIELD(a);
-    VALIDATOR_DECLARE_FIELD(s, MinLength(1), MaxLength(10), Length(1, 10));
-    VALIDATOR_DECLARE_FIELD(t, Size(0, 10, Size::WithErrorMessagePattern("size error")));
-    VALIDATOR_DECLARE_END
-};
-
-struct B {
-    A a;
-
-    VALIDATOR_DECLARE_BEGIN(B)
-    VALIDATOR_DECLARE_FIELD(a, ValidateNested());
-    VALIDATOR_DECLARE_END
 };
 
 TEST_F(ValidatorTest, validator_test) {
@@ -74,6 +60,15 @@ TEST_F(ValidatorTest, validator_nested_test) {
         auto res = b.Validate();
         EXPECT_FALSE(res.IsOK());
         EXPECT_EQ(res.Message(), std::string("`s` is to short. Min length is 1, but actual is 0."));
+    }
+}
+
+TEST_F(ValidatorTest, validator_external_test) {
+    C c;
+
+    {
+        auto res = Validator::Validate(c);
+        EXPECT_TRUE(res.IsOK());
     }
 }
 

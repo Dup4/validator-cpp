@@ -5,19 +5,25 @@
 
 namespace validator::validate {
 
+namespace is_not_empty_test {
+
+struct A {
+    std::string s;
+
+    VALIDATOR_DECLARE_BEGIN(A)
+    VALIDATOR_DECLARE_FIELD(s, IsNotEmpty())
+    VALIDATOR_DECLARE_END
+};
+
+}  // namespace is_not_empty_test
+
 class IsNotEmptyTest : public testing::Test {
 protected:
     virtual void SetUp() override {}
 };
 
 TEST_F(IsNotEmptyTest, is_not_empty_test) {
-    struct A {
-        std::string s;
-
-        VALIDATOR_DECLARE_BEGIN(A)
-        VALIDATOR_DECLARE_FIELD(s, IsNotEmpty());
-        VALIDATOR_DECLARE_END
-    };
+    using namespace is_not_empty_test;
 
     A a;
 

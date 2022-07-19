@@ -25,9 +25,19 @@ public:                                \
 #define VALIDATOR_DECLARE_FIELD(field, ...)                                                    \
     {                                                                                          \
         auto res = ::validator::Validator::ExecuteMultiValidate(field, #field, ##__VA_ARGS__); \
-        if (!res.IsOK()) {                                                                     \
-            return res;                                                                        \
-        }                                                                                      \
+        RESULT_OK_OR_RETURN(res);                                                              \
+    }
+
+#define VALIDATOR_EXTERNAL_DECLARE_BEGIN(Struct) Result __ValidatorExternal_Validate([[maybe_unused]] const Struct& s) {
+//
+#define VALIDATOR_EXTERNAL_DECLARE_END \
+    return ::validator::Result::OK();  \
+    }
+
+#define VALIDATOR_EXTERNAL_DECLARE_FIELD(field, ...)                                             \
+    {                                                                                            \
+        auto res = ::validator::Validator::ExecuteMultiValidate(s.field, #field, ##__VA_ARGS__); \
+        RESULT_OK_OR_RETURN(res);                                                                \
     }
 
 #endif  // VALIDATOR_INTERNAL_MACROS_H
