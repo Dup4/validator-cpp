@@ -5,6 +5,7 @@
 #include "gtest/gtest.h"
 
 #include "validator/internal/result.h"
+#include "validator/internal/result_utility.h"
 
 namespace validator {
 
@@ -17,13 +18,13 @@ TEST_F(ResultTest, generate_error_message_test) {
     {
         std::string error_message_pattern = "";
         std::map<std::string, std::string> replace_map;
-        EXPECT_EQ(GenerateErrorMessage(error_message_pattern, replace_map), "");
+        EXPECT_EQ(ResultUtility::GenerateErrorMessage(error_message_pattern, replace_map), "");
     }
 
     {
         std::string error_message_pattern = "test";
         std::map<std::string, std::string> replace_map;
-        EXPECT_EQ(GenerateErrorMessage(error_message_pattern, replace_map), "test");
+        EXPECT_EQ(ResultUtility::GenerateErrorMessage(error_message_pattern, replace_map), "test");
     }
 
     {
@@ -31,7 +32,7 @@ TEST_F(ResultTest, generate_error_message_test) {
         std::map<std::string, std::string> replace_map = {
                 {"$value", "123"},
         };
-        EXPECT_EQ(GenerateErrorMessage(error_message_pattern, replace_map), "test 123 222");
+        EXPECT_EQ(ResultUtility::GenerateErrorMessage(error_message_pattern, replace_map), "test 123 222");
     }
 }
 

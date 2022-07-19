@@ -5,6 +5,7 @@
 
 #include "../internal/options.h"
 #include "../internal/result.h"
+#include "../internal/result_utility.h"
 #include "../internal/validator.h"
 #include "../types_check/has_length.h"
 
@@ -39,8 +40,8 @@ public:
                 {"$actual_length", std::to_string(actual_value)},
         };
 
-        std::string error_message =
-                GenerateErrorMessage(options_.error_message_pattern.value_or(error_message_pattern), replace_map);
+        std::string error_message = ResultUtility::GenerateErrorMessage(
+                options_.error_message_pattern.value_or(error_message_pattern), replace_map);
 
         return ResultBuilder().WithIsValidation(false).WithErrorMessage(error_message).Build();
     }
